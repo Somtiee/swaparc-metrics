@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swaparc Metrics</title>
+  <style>
+    body {
+      background: #07132a;
+      color: #eaf6ff;
+      font-family: Inter, system-ui;
+      text-align: center;
+      padding-top: 60px;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    h1 {
+      color: #7cc5ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Swaparc Live Metrics</h1>
+    <p>Total Swaps: <span id="swaps">...</span></p>
+    <p>Total USDC Volume: $<span id="volume">...</span></p>
+  </div>
+
+  <script>
+    fetch("/api/stats")
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("swaps").innerText = d.swaps;
+        document.getElementById("volume").innerText = d.volumeUSDC;
+      });
+  </script>
+</body>
+</html>
